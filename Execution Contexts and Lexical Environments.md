@@ -68,11 +68,45 @@
   so the entire global execution context will be pushed into the stack first.
 - Whenever a function gets invoked/executed the execution context of that particular function will be pushed into the execution stack.
 - Even when a function is calling itself or another function, a separate execution context will be created for each of them separately.
+- Because of this reason even if we declare or use same variables in different functions the values will be associated to that particular execution context only.
+- Eg:
+  ```
+      function b() {
+          var x;
+          console.log(x) // o/p -> undefined
+          x = 3;
+      }
+      function a() {
+        var x = 2;
+        console.log(x) // o/p -> 2;
+        b()
+        console.log(x) // o/p -> 2
+      }
+      var x = 4
+      a()
+      console.log(x) // o/p -> 4
+  ```
 - Once the execution of the entire JS code is completed then the global execution context will also be popped out and the execution stack will be empty.
 - so whatever the execution context is on the top of the stack is currently running.
 - The order of execution contexts in the call stack will be based on the order the functions are getting invoked.
   
   <img width="1728" alt="Screenshot 2024-07-09 at 9 07 37 PM" src="https://github.com/kovvurisushma/Javascript-Concepts/assets/50438716/9ac8e333-7f9b-4e63-ac17-88178ecf4c86">
+
+### Hoisting in JavaScript
+- Hoisting is a phenomenon in Javascript by which you can access these variables and functions even before initializing without any error.
+- ```
+    b()
+    console.log(x) // output: undefined - accessing x even before initialization.
+    console.log(b) // output: f b() {console.log("hello")}
+    var x = 7
+
+    function b() {
+      console.log("hello")
+    }
+  ```
+- Accessing x even before initialization, here the value will be undefined because, in the first phase of execution, this variable will get created and is initialized with undefined.
+- This kind of mechanism is possible in Javascript because of the way it executes a program since the code gets executed in 2 phases in the first phase itself we are creating a memory for the variable, 
+  so while accessing them it is not throwing the error.
 
 
 
