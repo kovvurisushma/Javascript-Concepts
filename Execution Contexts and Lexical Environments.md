@@ -6,6 +6,24 @@
 # Lexical Environment
 - Where something sits physically in the code you write.
 - when we talk about the lexical environment it means where the variable sits and what surrounds it.
+- lexical environment of a context = local memory of a function + lexical environment of its parent.
+- lexical means hierarchy
+  - In this example:
+```
+  function b() {
+    console.log(myVar) // output: 3, not undefined and not 2
+  }
+
+  function a() {
+    var myVar = 2
+    b()
+  }
+
+  var myVar = 3
+  a()
+  ```
+  - The lexical environment for function a is - local memory (variable b) + lexical environment of parent(i.e., the global context)
+  - The lexical environment for function b is - local memory (no variables or functions are there so null here) + lexical environment of parent(**here parent/hierarchy of function b is global context and not function a()** because the memory for function b is created inside the global context as the definition is inside global context and not inside a()
 
 # Execution Context
 - A wrapper to help manage the code that is running
@@ -107,7 +125,69 @@
 - Accessing x even before initialization, here the value will be undefined because, in the first phase of execution, this variable will get created and is initialized with undefined.
 - This kind of mechanism is possible in Javascript because of the way it executes a program since the code gets executed in 2 phases in the first phase itself we are creating a memory for the variable, 
   so while accessing them it is not throwing the error.
+- what does this question mean, "whether a variable is hosted or not/ whether let and const are hoisted or not?"
+  - so a variable is hosted or not means -> can we access a variable before initializing it or not?
+  - and the answer is we can access var variables before initializing but the value will be undefined but we can't access let and const before initializing.
+  - so var variables are hoisted and let and const variables are not hoisted. 
+
+### Scope Chaining in JavaScript
+- Eg1:
+  ```
+  function b() {
+    console.log(myVar) // output: 3, not undefined and not 2
+  }
+
+  function a() {
+    var myVar = 2
+    b()
+  }
+
+  var myVar = 3
+  a()
+  ```
+- Whenever a variable is accessed in the function or anywhere in a JS program, It does more than look for the variable in the variable environment of the currently executing context, since every execution context has a reference to its outer environment. if the variable is not present inside the variable environment of the current context it will search in this reference for the variable.
+- what does outer environment mean?
+  - The outer environment for a function means where the definition of it sits, for example in the above scenario the outer environment for function a will be the global context and for function b also it will be the Global context and not the context of a, even though b() is getting called inside a. because of this the value of myVar will be 3 and not 2.
+  
+- Eg:
+```
+function a() {
+  function b() {
+    console.log(myVar)
+  }
+
+  var myVar = 2
+  b()
+}
+
+var myVar = 1
+a()
+```
+<img width="1728" alt="Screenshot 2024-07-13 at 2 42 21 PM" src="https://github.com/user-attachments/assets/168a35ff-a949-4176-9fd2-f8765ba13ea7">
 
 
+### Let, Var and Const
+- Whenever a var variable is declared it will get attached to the window object, and let and const will be present in a separate memory space(script).
+- Eg: 
+```
+function a() {
+  function b() {
+    console.log(myVar)  
+  }
+
+  var myVar = 2 //This will be present inside the global context of a but not in the window object as this var variable is inside a function
+  b()
+}
+
+var myVar = 1 //This variable will get attached to the window object as it is present inside the global execution context.
+a()
+
+```
+- Temporal dead zone: The temporal dead zone is the time from when the let/const variable is hoisted till it is initialized with some value.
+- If we try to access let and const before the initialization, i.e., when they are in the temporal dead zone we get that reference error.
+  -  we will get that variable as not defined even though it is hoisted, this is because let and const can't be accessed before initialization.
+- a const variable has to be initialized at the point of the declaration itself otherwise, it will throw a syntax error saying the same.
+  - and it will throw a type error if we try to re-assign a const variable a value after initializing.
+- The better practice of using let and const is to always declare and initialize them at the top of your code in this way you can avoid getting reference errors while trying to access variables inside the temporal dead zone.
 
 
