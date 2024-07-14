@@ -108,7 +108,7 @@
 - so whatever the execution context is on the top of the stack is currently running.
 - The order of execution contexts in the call stack will be based on the order the functions are getting invoked.
   
-  <img width="1728" alt="Screenshot 2024-07-09 at 9 07 37 PM" src="https://github.com/kovvurisushma/Javascript-Concepts/assets/50438716/9ac8e333-7f9b-4e63-ac17-88178ecf4c86">
+  <img width="800" alt="Screenshot 2024-07-09 at 9 07 37 PM" src="https://github.com/kovvurisushma/Javascript-Concepts/assets/50438716/9ac8e333-7f9b-4e63-ac17-88178ecf4c86">
 
 ### Hoisting in JavaScript
 - Hoisting is a phenomenon in Javascript by which you can access these variables and functions even before initializing without any error.
@@ -163,7 +163,7 @@ function a() {
 var myVar = 1
 a()
 ```
-<img width="1728" alt="Screenshot 2024-07-13 at 2 42 21 PM" src="https://github.com/user-attachments/assets/168a35ff-a949-4176-9fd2-f8765ba13ea7">
+<img width="800" alt="Screenshot 2024-07-13 at 2 42 21 PM" src="https://github.com/user-attachments/assets/168a35ff-a949-4176-9fd2-f8765ba13ea7">
 
 
 ### Let, Var and Const
@@ -189,5 +189,75 @@ a()
 - a const variable has to be initialized at the point of the declaration itself otherwise, it will throw a syntax error saying the same.
   - and it will throw a type error if we try to re-assign a const variable a value after initializing.
 - The better practice of using let and const is to always declare and initialize them at the top of your code in this way you can avoid getting reference errors while trying to access variables inside the temporal dead zone.
+- let and const are block-scoped variables, we can't access them outside, but var is the global scoped.
+<img width="800" alt="Screenshot 2024-07-13 at 6 47 25 PM" src="https://github.com/user-attachments/assets/37c79928-bc27-40d0-8d7a-4d3226834c10">
+
+- Here when we are trying to log b, it will throw a reference error that b is not defined because b variable is block scoped and we are trying to access it outside the block.
+- But a variable can be accessed as it is present in the global scope and not in the block scope.
+- the block memory will be removed as soon as that particular block's execution is completed.
+- the block scope also follows the lexical scope chain pattern.
+- Example:
+```
+  {
+    const a = 100
+    {
+      const a = 20
+      {
+        console.log(a) // 0/p -> 20
+      }
+    }
+  }
+```
+
+#### Shadowing in Javascript
+- When we declare two same var variables then the second one will shadow the first one.
+- For Example:
+```
+var a = 100
+{
+  var a = 10
+  let b = 20
+  const c = 30
+  console.log(a) // output: 10
+  console.log(b)
+  console.log(c)
+}
+console.log(a) // output: 10
+```
+since both these values are attached to the window object the second value will override the first value.
+
+- But in the case of let and const, it will not override the existing value as both will be present in different memory locations.
+<img width="833" alt="Screenshot 2024-07-13 at 7 00 57 PM" src="https://github.com/user-attachments/assets/e44504cc-fe90-42e9-957c-cae249f932a8">
+
+- You can't shadow a let/const variable using var, but vice-versa is possible.
+- the reason is that when we are shadowing any variables it should be within that boundary, so here we are trying to shadow a block scope value with global scope so this will cause a collision, so because of this we can't shadow a let with var.
+
+```
+let a = 20
+{
+    var a = 200
+    console.log(a)
+}
+console.log(a)
+```
+- But this is possible as a function has its separate memory block.
+```
+let a = 20
+function c() {
+    var a = 200
+    console.log(a)
+}
+console.log(a)
+```
+- This vice-versa is possible.
+```
+var a = 20
+{
+    let a = 200
+    console.log(a) // o/p -> 200
+}
+console.log(a) // o/p -> 20
+```
+
 
 
