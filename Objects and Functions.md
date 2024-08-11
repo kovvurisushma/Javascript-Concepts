@@ -1,4 +1,7 @@
 ### An object is a collection of named key-value pairs and a value can be another collection of key-value pairs
+- inside an object,
+  - if the value of a key is primitive then it is called a member
+  - if the value of a key is a function then it is called a method
 
 ## Dot Operator
 - Also known as member access operator, used to access keys inside an object
