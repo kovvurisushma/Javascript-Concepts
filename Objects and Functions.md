@@ -55,7 +55,7 @@ console.log(b) // output: 3
 ```
 
 - All the objects including functions follow pass by reference
-- Eg:
+Eg:
 ```
 var c = {greeting: "hi"}
 var d
@@ -68,7 +68,7 @@ console.log(d) // output: {greeting: hello}
 ```
 
 - It will be the pass by reference even for parameters
-  Example:
+Example:
 ```
 var c = {greeting = "hello"}
 var d = c
@@ -95,6 +95,7 @@ console.log(c) // output: {greeting: hello}
 console.log(d) // output: {greeting: hi}
 
 ```
+
 
 
 
