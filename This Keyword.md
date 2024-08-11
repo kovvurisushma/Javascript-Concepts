@@ -4,7 +4,7 @@
 
 # This in global Space
 - The value of this in the global space is always the global object.
-- This global object is different based on where the Js runtime is present.
+- This global object is different in different run times.
 - For Example in the case of a browser this global object is equal to the window object.
 - so that's the reason, we usually say that this in global space is equal to the window object, but in reality **this value will be equal to the global object in global space.**
 
