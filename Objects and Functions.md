@@ -99,6 +99,45 @@ console.log(d) // output: {greeting: hi}
 
 ```
 
+## Arrays in JavaScript
+- An array in JavaScript is a collection of elements, and these elements can be heterogeneous.
+  
+```
+var arr = [1,
+      false,
+      "hello",
+      {x: "this is an object"},
+      function greet() {
+        console.log("yes we can have functions in array as they are just JS objects")
+      }]
+```
+
+## Automatic Semicolon Insertion
+- In JavaScript, it is optional to use semicolons, because the JS syntax parser inserts it on your behalf.
+- for example, if it sees any return keyword it will add a ';' at the end of that word to return, this will cause issues sometimes
+  ```
+  function x() {
+    return
+    {
+      "a": "ABC"
+    }
+  }
+  x() // undefined
+  ```
+  - In the above case since there is nothing present after the return in the same line, the Js adds a semicolon after that and the compiler will return after the statement, so the return value will be undefined, whereas in the below example it will return object.
+
+  ```
+function x() {
+    return {
+      "a": "ABC"
+    }
+  }
+  x() // {a : "ABC"}
+  
+  ```
+
+
+
 
 
 
