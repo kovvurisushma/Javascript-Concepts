@@ -42,7 +42,25 @@ a()
 ```
 
 ## What does a block and block scope mean in Javascript?
-- A block or compound statement is nothing but the code/group of statements present in between { } these braces. A block is used to combine multiple javascript statements into one.
-and we need to group these multiple statements into one block so that we can use multiple statements in the places where the javascript expects only one statement.
-- and a block scope means that the variables/functions that are declared in a block can be accessed in between those {} and can't be accessed out side that block. 
+- A block or compound statement is nothing but the code/group of statements between { } these braces. A block is used to combine multiple javascript statements into one.
+and we need to group these multiple statements into one block so that we can use various statements in the places where the javascript expects only one statement.
+- and a block scope means that the variables/functions declared in a block can be accessed between those {} and can't be accessed outside that block.
+
+
+## Function Expression and Function Statement
+- 
+Function Statement or Function Declaration
+```
+function x() {
+ console.log("cvllcllgfxc")
+}
+```
+Function Expression
+```
+var x = function() {
+ console.log("heklloooo")
+}
+x()
+```
+- The difference between Function Expression and Declaration/Statement lies in hoisting. you can't access the function expression before declaration because its value will be undefined. but the functions that are defined by function declaration/statement can be invoked anywhere, even before declaration. 
 
