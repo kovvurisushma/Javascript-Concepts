@@ -48,7 +48,6 @@ and we need to group these multiple statements into one block so that we can use
 
 
 ## Function Expression and Function Statement
-- 
 Function Statement or Function Declaration
 ```
 function x() {
