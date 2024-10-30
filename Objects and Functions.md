@@ -123,10 +123,11 @@ var arr = [1,
     }
   }
   x() // undefined
+
   ```
   - In the above case since there is nothing present after the return in the same line, the Js adds a semicolon after that and the compiler will return after the statement, so the return value will be undefined, whereas in the below example it will return object.
 
-  ```
+```
 function x() {
     return {
       "a": "ABC"
@@ -135,6 +136,127 @@ function x() {
   x() // {a : "ABC"}
   
   ```
+
+## Call, Apply and Bind
+- Call, Apply, and Bind are methods in JavaScript that allow you to control the context (this value) in which a function is executed. They are particularly useful when invoking a function with a specific value or when you want to partially apply a function.
+
+**Call Method**
+- The call method is used to invoke a function with a specified this value and arguments provided individually.
+
+Syntax
+
+```function.call(thisArg, arg1, arg2, ...)```
+
+Example:
+
+```
+function greet(greeting, punctuation) {
+    console.log(greeting + ', ' + this.name + punctuation);
+}
+
+const person = { name: 'Alice' };
+
+greet.call(person, 'Hello', '!');
+```
+
+**Apply Method**
+- The apply method is similar to call, but it takes an array of arguments instead of listing them individually.
+
+Syntax:
+
+```functionName.apply(thisArg, [argsArray]);```
+
+Example:
+```
+function greet(greeting, punctuation) {
+    console.log(greeting + ', ' + this.name + punctuation);
+}
+
+const person = { name: 'Alice' };
+
+greet.apply(person, ['Hello', '!']);
+```
+
+**Bind Method**
+- The bind method creates a new function that, when called, has its this value set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+
+Syntax:
+
+```const boundFunction = functionName.bind(thisArg, arg1, arg2, ...);```
+
+Example:
+```
+function greet(greeting, punctuation) {
+    console.log(greeting + ', ' + this.name + punctuation);
+}
+
+const person = { name: 'Alice' };
+
+const greetPerson = greet.bind(person, 'Hello');
+greetPerson('!');
+```
+
+- The Call and Apply methods used for invoking the methods within specific context value(this), whereas the bind method always creates a new function.
+- The Call method generally used for normal variables while the apply method is helpful in dealing with arrays, objects..etc.
+
+**UseCases of Call,Apply and Bind**
+- **Method Borrowing**
+
+using call method.
+```
+const person1 = {
+    name: 'Alice',
+    greet: function() {
+        console.log('Hello, ' + this.name);
+    }
+};
+
+const person2 = {
+    name: 'Bob'
+};
+
+// Borrow the greet method from person1 and use it for person2
+person1.greet.call(person2);
+```
+  
+using apply method.
+```
+const numbers = [5, 6, 2, 3, 7];
+
+// Use apply to pass the array as arguments to Math.max
+const max = Math.max.apply(null, numbers);
+console.log(max); // Output: 7
+```
+
+- **Using apply to Pass Arguments to a Function**
+```
+function sum() {
+    return Array.prototype.reduce.call(arguments, (acc, curr) => acc + curr, 0);
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const total = sum.apply(null, numbers);
+console.log(total); // Output: 15
+```
+
+- **Function currying using bind**
+```
+// Step 1: Define a general function
+function multiply(a, b) {
+    return a * b;
+}
+
+// Step 2: Create a curried function using bind
+const multiplyByTwo = multiply.bind(null, 2);
+const multiplyByThree = multiply.bind(null, 3);
+
+// Step 3: Use the curried functions
+console.log(multiplyByTwo(5)); // Output: 10
+console.log(multiplyByThree(5)); // Output: 15
+```  
+
+
+
 
 
 
