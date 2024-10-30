@@ -68,7 +68,7 @@ myFunction(); // The stack trace will include 'named function'
 
 ## Anonymous Functions or Anonymous Function Expressions
 - A Function without a name is called an anonymous function.
-- anonymous functions don't have their own identity, ie., we can't create and use anonymous functions like normal functions.
+Anonymous functions don't have their own identity, so we can't create and use anonymous functions like normal functions.
 - they are used for temporary tasks like when we use functions as values for example passing the functions as arguments, as callbacks, or immediately invoked function expressions (IIFEs)
 
 **Characteristics of Anonymous Functions**
@@ -95,9 +95,79 @@ setTimeout(() => {
 - **Debugging:** Stack traces can be less informative because the function name is unavailable.
 - **Reusability:** They cannot be reused elsewhere in the code without assigning them to a variable.
 
+## Immediately Invoked Function Expressions(IIFEs)
+- An Immediately Invoked Function Expression (IIFE) is a JavaScript function that runs as soon as it is defined. It is a design pattern that is also known as a self-executing anonymous function and contains two major parts:
+    - Function Expression: This is the anonymous function with lexical scope enclosed within the () brackets.
+    - Immediately Invoked: The second part creates the immediately invoked function expression () through which the JavaScript engine will directly interpret the function.
+ 
+Syntax
+The basic syntax of an IIFE is as follows:
+
+```
+(function(name) {
+    console.log(`Hello, ${name}!`);
+})('World');
+```
+
+Or with arrow functions:
+
+```
+(() => {
+    // Code to be executed immediately
+})();
+```
+
+Explanation
+Function Expression: The function is defined within parentheses (). This is necessary because JavaScript treats anything within parentheses as an expression.
+Invocation: The function is immediately invoked by the trailing parentheses ().
+
+**Use Cases**
+- **Avoiding Global Scope Pollution**: IIFEs are often used to avoid polluting the global scope, especially in the context of libraries or frameworks.
+- **Creating a Private Scope**: Variables and functions defined inside an IIFE cannot be accessed from outside, providing a form of encapsulation.
+- **Initialization Code**: IIFEs are useful for running initialization code that only needs to be executed once.
+
+**Example:**
+```
+const CounterModule = (function() {
+    // Private variable to hold the counter value
+    let counter = 0;
+
+    // Private function to log the current counter value
+    function logCounter() {
+        console.log(`Current counter value: ${counter}`);
+    }
+
+    // Public API exposed by the module
+    return {
+        increment: function() {
+            counter++;
+            logCounter();
+        },
+        decrement: function() {
+            counter--;
+            logCounter();
+        },
+        reset: function() {
+            counter = 0;
+            logCounter();
+        },
+        getCounter: function() {
+            return counter;
+        }
+    };
+})();
+
+// Usage of the CounterModule
+CounterModule.increment(); // Current counter value: 1
+CounterModule.increment(); // Current counter value: 2
+CounterModule.decrement(); // Current counter value: 1
+CounterModule.reset();     // Current counter value: 0
+console.log(CounterModule.getCounter()); // 0
+```
+
 ## First Class Functions in Javascript
 - In JavaScript, functions are considered "first-class citizens" or "first-class functions."
-- This means that functions are treated as first-class objects, which allows them to be used in a variety of ways similar to other data types like numbers, strings, and objects.
+- This means that functions are treated as first-class objects, allowing them to be used in various ways similar to other data types like numbers, strings, and objects.
 
 **Characteristics of First-Class Functions**
 - Assigned to Variables
