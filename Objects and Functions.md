@@ -253,10 +253,94 @@ const multiplyByThree = multiply.bind(null, 3);
 // Step 3: Use the curried functions
 console.log(multiplyByTwo(5)); // Output: 10
 console.log(multiplyByThree(5)); // Output: 15
-```  
+```
 
+## Prototypal Inheritance 
 
+**Prototype:**
 
+Every JavaScript object has an internal property called [[Prototype]] (often accessed via __proto__).
+This prototype is itself an object from which the original object inherits properties and methods.
+
+**Prototype Chain:**
+
+When you try to access a property or method on an object, JavaScript first looks at the object itself.
+If the property or method is not found, it looks at the object's prototype, and then the prototype's prototype, and so on, until it reaches null (the end of the chain).
+This chain of prototypes is called the prototype chain.
+
+**Constructor Functions and prototype Property:**
+
+Functions in JavaScript can be used as constructors with the new keyword.
+Constructor functions have a prototype property that is used to set the [[Prototype]] of the objects created by the constructor.
+
+```
+// Define a prototype object
+const personPrototype = {
+    greet: function() {
+        console.log('Hello, my name is ' + this.name);
+    }
+};
+
+// Create an object that inherits from personPrototype
+const charlie = Object.create(personPrototype);
+charlie.name = 'Charlie';
+charlie.age = 28;
+
+// Access the inherited method
+charlie.greet(); // Output: Hello, my name is Charlie
+
+// Check the prototype chain
+console.log(Object.getPrototypeOf(charlie) === personPrototype); // true
+```
+
+## Similarities and Differences between (Call, Apply, Bind) and Prototype In Heritance.
+- The Call, Apply, and bind methods also allow us to get access or use other object methods or properties similar to prototype inheritance, there are some differences in why prototype inheritance is useful.
+- Using Call, Apply, and Bind, we are just borrowing the methods temporarily for that moment, but using prototype inheritance, we are attaching them to the object, and they can be shared across the instances.
+
+**Why We Need Prototypal Inheritance**
+
+**Shared Behavior:**
+
+Prototypal inheritance allows multiple objects to share the same methods and properties, which promotes code reuse and memory efficiency.
+Methods defined on the prototype are shared among all instances, so they are not duplicated for each instance.
+
+**Object Hierarchies:**
+
+Prototypal inheritance allows you to create complex object hierarchies where objects can inherit from other objects.
+This is useful for modeling real-world relationships and creating more organized and maintainable code.
+
+**Extensibility:**
+
+Objects inherited from a prototype can override or extend the inherited properties and methods.
+This allows for flexible and dynamic behavior, where child objects can customize or enhance the functionality provided by their prototypes.
+
+**Dynamic Method Addition:**
+
+You can add methods to the prototype at any time, and all instances that inherit from that prototype will have access to the new methods.
+This is useful for adding new functionality to existing objects without modifying their constructors.  
+
+**Example of Extensibility:**
+
+```
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.greet = function() {
+    console.log('Hello, my name is ' + this.name);
+};
+
+const alice = new Person('Alice');
+const bob = new Person('Bob');
+
+// Add a new method to the prototype
+Person.prototype.sayGoodbye = function() {
+    console.log('Goodbye from ' + this.name);
+};
+
+alice.sayGoodbye(); // Output: Goodbye from Alice
+bob.sayGoodbye();   // Output: Goodbye from Bob
+```
 
 
 
