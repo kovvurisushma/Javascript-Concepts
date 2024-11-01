@@ -18,6 +18,7 @@
   - [What Happens if you call a function constructor without a new keyword](#what-happens-if-you-call-a-function-constructor-without-a-new-keyword)
 - [Object.create()](#objectcreate)
 - [Polyfills](#polyfills)
+- [ES6 Class Notation for Creating Objects](#es6-classes)
 
 <a id="define-object"></a>
 ### Object in Js ###
@@ -652,4 +653,45 @@ if(!Object.create) {
     return new F();
   }
 }
+```
+<a id="es6-classes"></a>
+
+### ES6 Class Notation For Creating Objects ###
+
+ES6 (ECMAScript 2015) introduced a new syntax for creating objects and handling inheritance in JavaScript, known as class notation. This syntax provides a more familiar and structured way to define constructor functions and handle inheritance, making it easier to create and manage objects.
+
+Key Concepts
+- **Class Declaration:** Defines a new class with a constructor and methods.
+- **Constructor Method:** A special method for creating and initializing objects created with the class.
+- **Instance Methods:** Methods defined inside the class that are available to all instances.
+- **Static Methods:** Methods defined on the class itself, not on instances of the class.
+- **Inheritance:** Using the extends keyword to create a subclass that inherits from a parent class.
+- **Super Keyword:** Used to call the constructor or methods of the parent class.
+
+Example
+```
+// Step 1: Define the class
+class Person {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    greet() {
+        console.log(`Hello, my name is ${this.firstName} ${this.lastName}`);
+    }
+}
+
+// Create instances of the class
+const alice = new Person('Alice', 'Smith');
+const bob = new Person('Bob', 'Johnson');
+
+// Step 2: Add a new method to the prototype
+Person.prototype.getFullName = function() {
+    return `${this.firstName} ${this.lastName}`;
+};
+
+// Step 3: Use the new method
+console.log(alice.getFullName()); // Output: Alice Smith
+console.log(bob.getFullName());   // Output: Bob Johnson
 ```
