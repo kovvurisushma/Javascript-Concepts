@@ -20,11 +20,14 @@
 - [Polyfills](#polyfills)
 
 <a id="define-object"></a>
-### An object is a collection of named key-value pairs and a value can be another collection of key-value pairs
+### Object in Js ###
+
+**An object is a collection of named key-value pairs and a value can be another collection of key-value pairs**
 - inside an object,
   - if the value of a key is primitive then it is called a member
   - if the value of a key is a function then it is called a method
 
+<a id="dot-operator"></a>
 ## Dot Operator
 - Also known as member access operator, used to access keys inside an object
 - this operator takes two values and its precedence is from left to right
@@ -45,9 +48,11 @@ console.log(person.firstName) //There is no need to give the firstName in a stri
 -  **Preferred approach is to use dot operator instead of [] for accessing members whereever is possible**. Because it is very clean, clear, and easy to debug. but the [] can be used in case of accessing any dynamic member of an object.
 
 
+<a id="objects-and-object-literals"></a>
 ## objects and object literals
 - Object literal syntax means creating an object without using a new keyword, it just simply this: var parent = {}. This is called as object literal syntax.
 
+<a id="functions-as-objects"></a>
 ## Functions are Objects
 - In JavaScript, functions are nothing but objects. It has all the properties of objects and few more extra properties
 - First Class Functions:
@@ -66,6 +71,7 @@ greet.name = "Sushma"
 console.log(greet.name) // prints Sushma
 ```
 
+<a id="pass-by-value-and-pass-by-reference"></a>
 ## Pass by Value and Pass by reference
 - All the primitive values follow pass by by-value rule while copying/e.
 Eg:
@@ -121,6 +127,7 @@ console.log(d) // output: {greeting: hi}
 
 ```
 
+<a id="arrays-in-javascript"></a>
 ## Arrays in JavaScript
 - An array in JavaScript is a collection of elements, and these elements can be heterogeneous.
   
@@ -140,6 +147,7 @@ var arr = [1,
 - so that's the reason we are able to access elements of an array in js using indexes as they are the names of the array objects.
 - so if you want to add a custom method for the array prototype you can easily do it by adding the method to the array prototype object.
 
+<a id="automatic-semicolon-insertion"></a>
 ## Automatic Semicolon Insertion
 - In JavaScript, it is optional to use semicolons, because the JS syntax parser inserts it on your behalf.
 - for example, if it sees any return keyword it will add a ';' at the end of that word to return, this will cause issues sometimes
@@ -165,6 +173,7 @@ function x() {
   
   ```
 
+<a id="call-apply-and-bind"></a>
 ## Call, Apply and Bind
 - Call, Apply, and Bind are methods in JavaScript that allow you to control the context (this value) in which a function is executed. They are particularly useful when invoking a function with a specific value or when you want to partially apply a function.
 
@@ -227,6 +236,7 @@ greetPerson('!');
 - The Call and Apply methods used for invoking the methods within specific context value(this), whereas the bind method always creates a new function.
 - The Call method generally used for normal variables while the apply method is helpful in dealing with arrays, objects..etc.
 
+<a id="use-cases-of-call-apply-and-bind"></a>
 **UseCases of Call,Apply and Bind**
 - **Method Borrowing**
 
@@ -283,6 +293,7 @@ console.log(multiplyByTwo(5)); // Output: 10
 console.log(multiplyByThree(5)); // Output: 15
 ```
 
+<a id="prototypal-inheritance"></a>
 ## Prototypal Inheritance 
 
 **Prototype:**
@@ -321,10 +332,12 @@ charlie.greet(); // Output: Hello, my name is Charlie
 console.log(Object.getPrototypeOf(charlie) === personPrototype); // true
 ```
 
+<a id="similarities-and-differences-between-call-apply-bind-and-prototype-inheritance"></a>
 ## Similarities and Differences between (Call, Apply, Bind) and Prototype In Heritance.
 - The Call, Apply, and bind methods also allow us to get access or use other object methods or properties similar to prototype inheritance, there are some differences in why prototype inheritance is useful.
 - Using Call, Apply, and Bind, we are just borrowing the methods temporarily for that moment, but using prototype inheritance, we are attaching them to the object, and they can be shared across the instances.
 
+<a id="why-we-need-prototypal-inheritance"></a>
 **Why We Need Prototypal Inheritance**
 
 **Shared Behavior:**
@@ -370,6 +383,7 @@ alice.sayGoodbye(); // Output: Goodbye from Alice
 bob.sayGoodbye();   // Output: Goodbye from Bob
 ```
 
+<a id="constructor-functions"></a>
 ## Function Constructors
 
 Function Constructors in JavaScript are a way to create Objects and define their properties and methods. They are essentially the normal functions that are used with
@@ -451,11 +465,13 @@ Person {firstName: "John", lastName: "Doe"}
 Person {firstName: "Jane", lastName: "Doe"}
 ```
 
+<a id="how-does-function-constructors-set-the-prototype-value-for-object"></a>
 **How does Function Constructors set the prototype Value for Object**
 
 - As we all know, Functions are special objects in Javascript. Some properties are present inbuilt for function objects like - name, code property and prototype property.
 // TODO: Add Screenshot
 
+<a id="advantages"></a>
 **Advantages of Constructor Function**
 - The main advantage of creating an object using the Constructor Function is that we can add the methods to the prototype of that function and all the objects that are created will get access to these methods in the prototype using prototype inheritance.
 
@@ -482,6 +498,7 @@ Person {firstName: "Jane", lastName: "Doe"}
 ```
 - So it helps in adding new methods to the prototype which will be accessible to all the instances created.
 
+<a id="why-cant-we-add-the-methods-inside-the-function-constructor"></a>
 **Why can't we add the methods inside the function constructor?**
 
 - why can't we add methods similar to members/variables inside the function constructor? why is it the best practice to add them to the prototype object?
@@ -516,7 +533,8 @@ jane.getFullName()
 Person {firstName: "John", lastName: "Doe"}
 Person {firstName: "Jane", lastName: "Doe"}
 ```
-  
+
+<a id="what-happens-if-you-call-a-function-constructor-without-a-new-keyword"></a>
 **What Happens if you call a function constructor without a new keyword**
 
 ```
@@ -571,6 +589,7 @@ p2.greet(); // Output: Hello, my name is Jane Doe
 - The new keyword is optimized by JavaScript engines to efficiently set up the prototype chain. The new keyword handles object creation and initialization in a single, optimized step.
 
 
+<a id="objectcreate"></a>
 ## Creating Objects using Object.create() Method ##
 
 The Object.create method in JavaScript is a powerful and flexible way to create new objects with a specified prototype. This method allows you to create an object that directly inherits from another object, which can be very useful for setting up inheritance hierarchies.
@@ -599,6 +618,7 @@ john.secondName = "Doe"
 console.log(john)
 ```
 
+<a id="polyfills"></a>
 ## Polyfills in Javascript ##
 
 Polyfills are an important concept in JavaScript, especially when dealing with cross-browser compatibility and ensuring that your code works in older environments that may not support newer features. Let's dive into what polyfills are, why they are used, and how to create and use them.
