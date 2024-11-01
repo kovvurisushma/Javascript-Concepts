@@ -342,9 +342,141 @@ alice.sayGoodbye(); // Output: Goodbye from Alice
 bob.sayGoodbye();   // Output: Goodbye from Bob
 ```
 
+## Function Constructors
+
+Function Constructors in JavaScript are a way to create Objects and define their properties and methods. They are essentially the normal functions that are used with
+```new``` keyword to create instances of objects.  When a function is used as a constructor, it sets up the new object and initializes its properties.
+
+- **Constructor Function:** A function intended to be used with the new keyword to create new objects.
+- **this Keyword:** Inside a constructor function, this refers to the new object being created.
+- **Prototype:** Constructor functions have a prototype property that allows you to add methods and properties that will be shared among all instances created by the constructor.
+
+```
+function Person() {
+  this.firstName = "John"
+  this.lastName = "Doe"
+}
+
+var john = new Person()
+console.log(john)
+
+//Output:
+Person {firstName: "John", lastName: "Doe"}
+```
+
+- **New**: Whenever we use a new Operator, an empty object is created immediately.
+- **New Operator**: Creates a new object, sets its prototype to the constructor function's prototype property, binds this to the new object, initializes properties, and returns the new object.
+- So whenever we invoke a function with the new keyword, the "this" keyword in that function points to the empty object created by the new keyword.
+- Now when we do this.firstName = and this.lastName=, we are adding this firstName and lastName to this empty object.
+- As long as the function invoked by the new keyword doesn't return anything, the JSEngine returns the object created by the new keyword.
+- But if the function returns something then that will be the value of john. consider the following example as the function is returning an object the value of john will be that object.
+   
+```
+function Person() {
+  this.firstName = "John"
+  this.lastName = "Doe"
+  return {greeting: "I got in the way"}
+}
+
+var john = new Person()
+console.log(john)
+
+//Output:
+Object {greeting: "I got in the way"}
+```
+
+- you can create multiple objects using this constructor function.
+
+```
+function Person() {
+  this.firstName = "John"
+  this.lastName = "Doe"
+}
+
+var john = new Person()
+console.log(john)
+
+var jane = new Person()
+console.log(jane)
+
+//Output:
+Person {firstName: "John", lastName: "Doe"}
+Person {firstName: "John", lastName: "Doe"}
+```
+- Here the two separate objects of the same Person type will be created as we are invoking with a new keyword.
+- We can set separate parameters to make this Person object more generic.
+  
+```
+function Person(firstName, lastName) {
+  this.firstName = firstName
+  this.lastName = lastName
+}
+
+var john = new Person("John", "Doe")
+console.log(john)
+
+var jane = new Person("Jane", "Doe")
+console.log(jane)
+
+//Output:
+Person {firstName: "John", lastName: "Doe"}
+Person {firstName: "Jane", lastName: "Doe"}
+```
+
+**How does Function Constructors set the prototype Value for Object**
+
+- As we all know, Functions are special objects in Javascript. Some properties are present inbuilt for function objects like - name, code property and prototype property.
 
 
+**What Happens if you call a function constructor without a new keyword**
 
+```
+function Person(firstName, lastName) {
+  this.firstName = firstName
+  this.lastName = lastName
+}
 
+var john = Person("John", "Doe")
+console.log(john)
 
-       
+//Output: undefined as we are not returning anything
+```
+
+- Consider this example where you are returning this object.
+
+```
+function Person(firstName, lastName) {
+  this.firstName = firstName
+  this.lastName = lastName
+  return this
+}
+
+var john = Person("John", "Doe")
+console.log(john)
+```
+- Output: the john value has the window object or the object to which the "this" keyword is pointing to in that execution context.
+  
+```
+function Person(firstName, lastName) {
+    const obj = {};
+    obj.firstName = firstName;
+    obj.lastName = lastName;
+    Object.setPrototypeOf(obj, Person.prototype);
+    return obj;
+}
+
+Person.prototype.greet = function() {
+    console.log('Hello, my name is ' + this.firstName + ' ' + this.lastName);
+};
+
+const p1 = Person('John', 'Doe'); // Works, but not idiomatic
+const p2 = new Person('Jane', 'Doe'); // Works, but not consistent with p1
+
+console.log(p1 instanceof Person); // true
+console.log(p2 instanceof Person); // true
+p1.greet(); // Output: Hello, my name is John Doe
+p2.greet(); // Output: Hello, my name is Jane Doe
+```
+- The above code achieves the same result as a function constructor by creating an empty object, initializing it, and setting its prototype. However, this approach is not recommended for creating objects because it is more prone to errors, less maintainable, and less performance-efficient compared to using a function constructor with the new keyword.
+- Traditional Function Constructor: Preferred for its readability, maintainability, performance, and robustness. It follows JavaScript conventions and ensures consistent behavior.
+- The new keyword is optimized by JavaScript engines to efficiently set up the prototype chain. The new keyword handles object creation and initialization in a single, optimized step.
