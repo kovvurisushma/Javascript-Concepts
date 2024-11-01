@@ -1,25 +1,25 @@
 ### Table of Contents ###
-- [Define Object](item-one)
-- Dot Operator
-- Objects and Object literals
-- Functions as Objects
-- Pass by Value and Pass by reference
-- Arrays in JavaScript
-- Automatic Semicolon Insertion
-- Call, Apply and Bind
-  - UseCases of Call,Apply and Bind
-- Prototypal Inheritance
-  - Similarities and Differences between (Call, Apply, Bind) and Prototype In Heritance.
-  - Why We Need Prototypal Inheritance
-- Constructor Functions
-  - How does Function Constructors set the prototype Value for Object
-  - Advantages
-  - Why can't we add the methods inside the function constructor?
-  - What Happens if you call a function constructor without a new keyword
-- Object.Create()
-- Polyfills
+- [Define Object](#define-object)
+- [Dot Operator](#dot-operator)
+- [Objects and Object Literals](#objects-and-object-literals)
+- [Functions as Objects](#functions-as-objects)
+- [Pass by Value and Pass by Reference](#pass-by-value-and-pass-by-reference)
+- [Arrays in JavaScript](#arrays-in-javascript)
+- [Automatic Semicolon Insertion](#automatic-semicolon-insertion)
+- [Call, Apply and Bind](#call-apply-and-bind)
+  - [Use Cases of Call, Apply and Bind](#use-cases-of-call-apply-and-bind)
+- [Prototypal Inheritance](#prototypal-inheritance)
+  - [Similarities and Differences between Call, Apply, Bind and Prototype Inheritance](#similarities-and-differences-between-call-apply-bind-and-prototype-inheritance)
+  - [Why We Need Prototypal Inheritance](#why-we-need-prototypal-inheritance)
+- [Constructor Functions](#constructor-functions)
+  - [How does Function Constructors set the prototype Value for Object](#how-does-function-constructors-set-the-prototype-value-for-object)
+  - [Advantages](#advantages)
+  - [Why can't we add the methods inside the function constructor?](#why-cant-we-add-the-methods-inside-the-function-constructor)
+  - [What Happens if you call a function constructor without a new keyword](#what-happens-if-you-call-a-function-constructor-without-a-new-keyword)
+- [Object.create()](#objectcreate)
+- [Polyfills](#polyfills)
 
-<a id="item-one"></a>
+<a id="define-object"></a>
 ### An object is a collection of named key-value pairs and a value can be another collection of key-value pairs
 - inside an object,
   - if the value of a key is primitive then it is called a member
