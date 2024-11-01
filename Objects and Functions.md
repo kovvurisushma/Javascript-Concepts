@@ -1,3 +1,25 @@
+### Table of Contents ###
+- [Define Object](item-one)
+- Dot Operator
+- Objects and Object literals
+- Functions as Objects
+- Pass by Value and Pass by reference
+- Arrays in JavaScript
+- Automatic Semicolon Insertion
+- Call, Apply and Bind
+  - UseCases of Call,Apply and Bind
+- Prototypal Inheritance
+  - Similarities and Differences between (Call, Apply, Bind) and Prototype In Heritance.
+  - Why We Need Prototypal Inheritance
+- Constructor Functions
+  - How does Function Constructors set the prototype Value for Object
+  - Advantages
+  - Why can't we add the methods inside the function constructor?
+  - What Happens if you call a function constructor without a new keyword
+- Object.Create()
+- Polyfills
+
+<a id="item-one"></a>
 ### An object is a collection of named key-value pairs and a value can be another collection of key-value pairs
 - inside an object,
   - if the value of a key is primitive then it is called a member
@@ -111,6 +133,12 @@ var arr = [1,
         console.log("yes we can have functions in array as they are just JS objects")
       }]
 ```
+
+## Array as an Object in Javascript ##
+- Array is considered as an object in javascript.
+- In Array, the index is the name and the element is the value.
+- so that's the reason we are able to access elements of an array in js using indexes as they are the names of the array objects.
+- so if you want to add a custom method for the array prototype you can easily do it by adding the method to the array prototype object.
 
 ## Automatic Semicolon Insertion
 - In JavaScript, it is optional to use semicolons, because the JS syntax parser inserts it on your behalf.
@@ -542,11 +570,6 @@ p2.greet(); // Output: Hello, my name is Jane Doe
 - Traditional Function Constructor: Preferred for its readability, maintainability, performance, and robustness. It follows JavaScript conventions and ensures consistent behavior.
 - The new keyword is optimized by JavaScript engines to efficiently set up the prototype chain. The new keyword handles object creation and initialization in a single, optimized step.
 
-## Array as an Object in Javascript ##
-- Array is considered as object in javascript.
-- In Array the index is the name and the element is the value.
-- so that's the reason we are able to access elements of array in js using indexes as they are the names of array object.
-- so if you want to add custom method for array prototype you can easily do it by adding the method to array prototype object.
 
 ## Creating Objects using Object.create() Method ##
 
