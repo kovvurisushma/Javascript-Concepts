@@ -426,8 +426,69 @@ Person {firstName: "Jane", lastName: "Doe"}
 **How does Function Constructors set the prototype Value for Object**
 
 - As we all know, Functions are special objects in Javascript. Some properties are present inbuilt for function objects like - name, code property and prototype property.
+// TODO: Add Screenshot
 
+**Advantages of Constructor Function**
+- The main advantage of creating an object using the Constructor Function is that we can add the methods to the prototype of that function and all the objects that are created will get access to these methods in the prototype using prototype inheritance.
 
+```
+function Person(firstName, lastName) {
+  this.firstName = firstName
+  this.lastName = lastName
+}
+
+Person.prototype.getFullName = function() { return this.firstName + " " +  this.lastName}
+
+var john = new Person("John", "Doe")
+console.log(john)
+
+var jane = new Person("Jane", "Doe")
+console.log(jane)
+
+john.getFullName()
+jane.getFullName()
+
+//Output:
+Person {firstName: "John", lastName: "Doe"}
+Person {firstName: "Jane", lastName: "Doe"}
+```
+- So it helps in adding new methods to the prototype which will be accessible to all the instances created.
+
+**Why can't we add the methods inside the function constructor?**
+
+- why can't we add methods similar to members/variables inside the function constructor? why is it the best practice to add them to the prototype object?
+  - When we create an object using the new operator, a new object is instantiated each time, consuming memory space.
+  - If we add methods inside the constructor function, similar to how we add member variables (e.g., firstName and lastName), each new object will have its own copy of these       
+     methods.
+  - For example, if we create 1000 Person objects, each object will have its own greet() or getFullName() method, leading to 1000 copies of these methods. This will consume a 
+     significant amount of memory unnecessarily.
+  - Member variables should be defined inside the constructor because their values will differ from object to object. For instance, each Person object will have a different 
+    firstName and lastName, so it is important to create these members individually for each object.
+  - However, methods are typically the same for all instances of an object. To reduce memory usage, we define methods on the prototype. This way, the methods are shared and 
+     accessible among all objects created from the constructor, ensuring efficient memory usage.
+  
+```
+function Person(firstName, lastName) {
+  this.firstName = firstName
+  this.lastName = lastName
+}
+
+Person.prototype.getFullName = function() { return this.firstName + " " +  this.lastName}
+
+var john = new Person("John", "Doe")
+console.log(john)
+
+var jane = new Person("Jane", "Doe")
+console.log(jane)
+
+john.getFullName()
+jane.getFullName()
+
+//Output:
+Person {firstName: "John", lastName: "Doe"}
+Person {firstName: "Jane", lastName: "Doe"}
+```
+  
 **What Happens if you call a function constructor without a new keyword**
 
 ```
@@ -480,3 +541,72 @@ p2.greet(); // Output: Hello, my name is Jane Doe
 - The above code achieves the same result as a function constructor by creating an empty object, initializing it, and setting its prototype. However, this approach is not recommended for creating objects because it is more prone to errors, less maintainable, and less performance-efficient compared to using a function constructor with the new keyword.
 - Traditional Function Constructor: Preferred for its readability, maintainability, performance, and robustness. It follows JavaScript conventions and ensures consistent behavior.
 - The new keyword is optimized by JavaScript engines to efficiently set up the prototype chain. The new keyword handles object creation and initialization in a single, optimized step.
+
+## Array as an Object in Javascript ##
+- Array is considered as object in javascript.
+- In Array the index is the name and the element is the value.
+- so that's the reason we are able to access elements of array in js using indexes as they are the names of array object.
+- so if you want to add custom method for array prototype you can easily do it by adding the method to array prototype object.
+
+## Creating Objects using Object.create() Method ##
+
+The Object.create method in JavaScript is a powerful and flexible way to create new objects with a specified prototype. This method allows you to create an object that directly inherits from another object, which can be very useful for setting up inheritance hierarchies.
+
+- **Prototype:** The object from which the new object will inherit properties and methods.
+- **Properties Object:** An optional second argument that allows you to define additional properties for the new object.
+
+Syntax
+
+```
+const newObject = Object.create(prototypeObject, propertiesObject);
+```
+
+Example:
+
+```
+var person = {
+  firstName: 'default'
+  secondName: 'default'
+  greet(): function() {console.log(this.firstName + ' ' + this.secondName)}
+}
+
+var john = Object.create(person)
+john.firstName = "john"
+john.secondName = "Doe"
+console.log(john)
+```
+
+## Polyfills in Javascript ##
+
+Polyfills are an important concept in JavaScript, especially when dealing with cross-browser compatibility and ensuring that your code works in older environments that may not support newer features. Let's dive into what polyfills are, why they are used, and how to create and use them.
+
+**What is a Polyfill?**
+
+A polyfill is a piece of code (usually JavaScript) that provides the functionality of modern features on older browsers or environments that do not natively support those features. Essentially, polyfills "fill in" the gaps in functionality, allowing developers to use modern APIs and features without worrying about compatibility issues.
+
+**Why Use Polyfills?**
+
+- **1.Cross-Browser Compatibility:** Different browsers may support different sets of features. Polyfills ensure that your code works consistently across all browsers.
+- **2.Backward Compatibility:** Older browsers may not support newer JavaScript features. Polyfills allow you to use modern features while maintaining compatibility with older browsers.
+- **3.Future-Proofing:** As new features are added to JavaScript, polyfills can help you adopt these features early, even if they are not yet widely supported.
+
+**How to Use Polyfills**
+
+Polyfills can be included in your project in several ways:
+
+- **Manually Including Polyfills:** You can manually include polyfill scripts in your HTML or JavaScript files.
+- **Using Polyfill Services:** Services like polyfill.io provide a way to include polyfills dynamically based on the user's browser.
+- **Using Libraries:** Libraries like Babel include polyfills for modern JavaScript features.
+
+Example
+
+```
+if(!Object.create) {
+  Object.create = function(o) {
+    if(arguments.length > 1) throw new Error("Object.create method allows only one object as first parameter")
+    function F() { }
+    F.prototype = o
+    return new F();
+  }
+}
+```
