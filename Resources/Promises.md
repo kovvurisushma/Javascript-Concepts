@@ -3,7 +3,8 @@
  - [What is a Promise?](#item-two)
  - [The .then()](#item-three)
    - [Promise Chaining and Error Handling](#item-three-sub)
- - [How does JSEngine Execute a Promise](#item-four)
+ - [Promise Concurrency](#item-four)
+ - [How does JSEngine Execute a Promise](#item-five)
 
  <a id="item-one"></a>
 
@@ -236,7 +237,92 @@ p1.then((data) => {
  });
 ```
 
- <a id="item-four"></a>
+ <a id="item-five"></a>
+
+### Promise Concurrency in JavaScript
+
+Promise concurrency refers to the ability to manage multiple asynchronous operations simultaneously. JavaScript provides several methods to handle concurrent Promises, allowing you to execute multiple asynchronous tasks in parallel and manage their results efficiently.
+
+1. **Promise.all:**
+- Waits for all Promises to resolve or any to reject.
+- Returns a single Promise that resolves with an array of results or rejects with the reason of the first rejected Promise.
+
+Example:
+
+```
+const promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'one'));
+const promise2 = new Promise((resolve) => setTimeout(resolve, 2000, 'two'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'three'));
+
+Promise.all([promise1, promise2, promise3])
+    .then((values) => {
+        console.log(values); // ["one", "two", "three"]
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+```
+  
+2. **Promise.allSettled:**
+- Waits for all Promises to settle (either resolve or reject).
+- Returns a single Promise that resolves with an array of objects describing the outcome of each input Promise.
+
+Example:
+
+```
+const promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'one'));
+const promise2 = new Promise((resolve, reject) => setTimeout(reject, 2000, 'error'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'three'));
+
+Promise.allSettled([promise1, promise2, promise3])
+    .then((results) => {
+        results.forEach((result) => console.log(result));
+        // { status: "fulfilled", value: "one" }
+        // { status: "rejected", reason: "error" }
+        // { status: "fulfilled", value: "three" }
+    });
+```
+
+3. **Promise.race:**
+- Returns a single Promise that resolves or rejects as soon as one of the input Promises resolves or rejects.
+
+Example:
+
+```
+const promise1 = new Promise((resolve) => setTimeout(resolve, 1000, 'one'));
+const promise2 = new Promise((resolve) => setTimeout(resolve, 2000, 'two'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'three'));
+
+Promise.race([promise1, promise2, promise3])
+    .then((value) => {
+        console.log(value); // "one"
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+```
+
+4. **Promise.any:**
+- Returns a single Promise that resolves as soon as one of the input Promises resolves.
+- Rejects with an AggregateError if all input Promises reject.
+
+Example:
+
+```
+const promise1 = new Promise((resolve, reject) => setTimeout(reject, 1000, 'error1'));
+const promise2 = new Promise((resolve) => setTimeout(resolve, 2000, 'two'));
+const promise3 = new Promise((resolve) => setTimeout(resolve, 3000, 'three'));
+
+Promise.any([promise1, promise2, promise3])
+    .then((value) => {
+        console.log(value); // "two"
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+```
+ 
+ <a id="item-five"></a>
 
  ### How does JSEngine Execute a Promise
 
