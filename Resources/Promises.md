@@ -218,10 +218,11 @@ p1.then((data) => {
     (err) => {
         console.log("inside error handlerrrrr"); // This onRejected handler will be executed because the Promise is rejected
         console.log(err); // Logs "Error occurred"
+        throw new Error("hfbhbfhdf")
     }
 )
 .then(null, (error) => {
-    console.log("Handled in onRejected:", error);  // This onRejected handler will not be executed because the error was already handled
+    console.log("Handled in onRejected:", error);  
     return "Recovered from error"; 
 })
 .then((val2) => {
