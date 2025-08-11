@@ -165,7 +165,7 @@ CounterModule.reset();     // Current counter value: 0
 console.log(CounterModule.getCounter()); // 0
 ```
 
-## First Class Functions in Javascript
+## First Class Functions in JavaScript
 - In JavaScript, functions are considered "first-class citizens" or "first-class functions."
 - This means that functions are treated as first-class objects, allowing them to be used in various ways similar to other data types like numbers, strings, and objects.
 
@@ -174,3 +174,11 @@ console.log(CounterModule.getCounter()); // 0
 - Passed as Arguments
 - Returned from Other Functions
 - Stored in Data Structures
+
+## Generator Functions in JavaScript
+- A generator function is a function that can be paused and resumed at any point during execution. It works best with iterables, allowing creation of data streams with ease.
+- They are defined by **function\*** and it contains one or more yeild expressions
+- The main method of the generator is next(). When called, it runs the execution till the next yield.
+- It returns a special object called "generator object" that contains 2 properties: done and value
+  - value: the yielded value
+  - done: true if the function code has finished, otherwise false.
