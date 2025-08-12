@@ -59,18 +59,18 @@
 
 ## 5.Quick Decision Flow for this
 
-Arrow function?
+- step1: Arrow function?
 → Inherit from lexical parent scope → Done.
 
-Called with new?
+- step2: Called with new?
 → Bind to new object (unless object returned explicitly).
 
-Explicit binding (call, apply, bind)?
+- step3: Explicit binding (call, apply, bind)?
 → Bind to given this (unless arrow function).
 
-Called as object method?
+- step4: Called as object method?
 → Bind to the object before the dot.
 
-Plain function call?
+- step5: Plain function call?
 → Global object (non-strict) or undefined (strict).
 
