@@ -74,3 +74,4 @@
 - step5: Plain function call?
 → Global object (non-strict) or undefined (strict).
 
+- These steps define the priority order as well if the scenario matches any step break there. because these steps follow priority order as well:  new keyword > explicit binding > implict binding
