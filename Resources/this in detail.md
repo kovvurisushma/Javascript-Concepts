@@ -46,23 +46,19 @@
   obj.method();
 ```
 
-### 4. This Binding Methods
-call(thisArg, ...args)
+## 4. This Binding Methods
 
-Calls immediately with the provided this
-
-apply(thisArg, argsArray)
-
-Same as call, but arguments passed as an array
-
-bind(thisArg)
-
-Returns a new function with this permanently set
-
-For arrow functions: None of the above can change this
+- call(thisArg, ...args)
+  - Calls immediately with the provided this
+- apply(thisArg, argsArray)
+  - Same as call, but arguments passed as an array
+- bind(thisArg)
+  - Returns a new function with this permanently set
+- **For arrow functions: None of the above can change this**
 
 
-### 5.Quick Decision Flow for this
+## 5.Quick Decision Flow for this
+
 Arrow function?
 → Inherit from lexical parent scope → Done.
 
